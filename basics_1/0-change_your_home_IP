@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# configures localhost and facebook.com IP addresses in /etc/hosts
+# configures localhostt and facebook.com IP addresses in /etc/hosts
 
 # check if running as root
 sudo cp /etc/hosts /etc/hosts.bak
