@@ -1,4 +1,28 @@
-#!/usr/bin/env bash
-# command displays TCP and UDP ports
+#!/bin/bash
 
-netstat -lp
+# Display active internet and UNIX domain listening sockets with PID and program names
+
+# Check for root privileges
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
+echo "Active Internet connections (only servers)"
+ss -tulnmp | awk '
+BEGIN { 
+    print "Proto Recv-Q Send-Q Local Address:Port      Foreign Address:Port   State       PID/Program name" 
+}
+NR>1 {
+    print $1, $2, $3, $4, $5, $6, $7
+}'
+
+echo
+echo "Active UNIX domain sockets (only servers)"
+ss -xlunp | awk '
+BEGIN { 
+    print "Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path" 
+}
+NR>1 {
+    print $1, $2, $3, $4, $5, $6, $7, $8
+}'
