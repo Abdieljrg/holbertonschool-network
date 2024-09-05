@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Check if an argument is passed
 if [ -z "$1" ]; then
@@ -6,5 +6,5 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-# Ping the provided IP address 5 timess
+# Ping the provided IP address 5 timesss
 ping -c 5 "$1"
